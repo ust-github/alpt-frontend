@@ -1,0 +1,44 @@
+pipeline {
+  agent { label 'chrome' }
+  tools {
+    nodejs 'NodeJS'
+  }
+  stages {
+    stage ('Install (cbxzvw)') {
+      steps {
+        sh script: 'npm install', label: 'v5ftm5'
+      } //end steps
+    } // end stage Install
+    stage ('Test and Build (6ljzxp)') {
+      steps {
+        sh script: 'ng test  --browsers=ChromeHeadless --codeCoverage=true --preserveSymlinks=false --sourceMap=true --watch=false', label: 'lcqf5g'
+        sh script: 'ng build  --aot=false --buildOptimizer=false --commonChunk=true --crossOrigin=none --deleteOutputPath=true --extractCss=false --extractLicenses=false --forkTypeChecker=true --namedChunks=true --outputHashing=none --preserveSymlinks=false --prod=true --serviceWorker=false --sourceMap=true --statsJson=false --subresourceIntegrity=false --vendorChunk=true', label: '3qamdl'
+      } //end steps
+    } // end stage Test and Build
+    stage ('Lint (3z6jbd)') {
+      steps {
+        sh script: 'ng lint --fix=false --force=false --format=prose --typeCheck=false', label: 'eht2gq'
+      } //end steps
+    } // end stage Lint
+    stage ('Deploy (ru2rc3)') {
+      steps {
+        script { 
+	rtUpload (
+		serverId: "",
+		spec:
+			"""{
+				"files": [
+					{
+						"pattern": "",
+						"target" : ""
+					}
+				]
+			}"""
+	)
+}
+sh script: 'sleep 0.005', label: 'lj8y39'
+
+      } //end steps
+    } // end stage Deploy
+  }
+}
